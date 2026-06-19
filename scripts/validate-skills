@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+skills_dir="$repo_root/skills"
+failed=0
+
+shopt -s nullglob
+
+for skill_dir in "$skills_dir"/*; do
+  [[ -d "$skill_dir" ]] || continue
+
+  skill_name="$(basename "$skill_dir")"
+  skill_file="$skill_dir/SKILL.md"
+
+  if [[ ! -f "$skill_file" ]]; then
+    printf 'missing SKILL.md: %s\n' "$skill_name" >&2
+    failed=1
+    continue
+  fi
+
+  if ! awk 'NR==1 { exit ($0 == "---" ? 0 : 1) }' "$skill_file"; then
+    printf 'missing YAML front matter opener: %s\n' "$skill_file" >&2
+    failed=1
+  fi
+
+  if ! awk '/^---$/ { count++; if (count == 2) exit 0 } END { exit (count >= 2 ? 0 : 1) }' "$skill_file"; then
+    printf 'missing YAML front matter closer: %s\n' "$skill_file" >&2
+    failed=1
+  fi
+
+  if ! grep -Eq '^name: '"$skill_name"'$' "$skill_file"; then
+    printf 'front matter name must match folder: %s\n' "$skill_file" >&2
+    failed=1
+  fi
+
+  if ! grep -Eq '^description: ".+"$' "$skill_file"; then
+    printf 'front matter description must be quoted: %s\n' "$skill_file" >&2
+    failed=1
+  fi
+done
+
+if [[ "$failed" -ne 0 ]]; then
+  exit 1
+fi
+
+printf 'skills ok\n'

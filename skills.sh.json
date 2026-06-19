@@ -1,0 +1,13 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "Personal Workflow",
+      "description": "Reusable Josh/Otto workflow skills that are safe to share publicly.",
+      "skills": [
+        "tee-time"
+      ]
+    }
+  ]
+}

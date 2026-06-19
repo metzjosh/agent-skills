@@ -1,7 +1,6 @@
 ---
 name: tee-time
-description: Plan a golf day with weather-first recommendations. Use when Josh asks about tee times, golf weather, or planning a round. Prioritizes conditions (temp, wind, rain) over course quality, and surfaces decision-relevant details quickly.
-domain: recreation
+description: "Plan a golf day with weather-first recommendations."
 ---
 
 # Tee Time
@@ -16,8 +15,8 @@ Given a target date or "when should I golf next", this skill fetches weather for
 |--------|--------|-------|
 | Precipitation | High | No rain/lightning in forecast window |
 | Wind | Medium | >15 mph is a dealbreaker for enjoyment |
-| Temperature | Low | >50°F is playable, >60°F is good |
-| UV/Cloud | Low | Sunny >50°F beats rainy 70°F every time |
+| Temperature | Low | >50F is playable, >60F is good |
+| UV/Cloud | Low | Sunny >50F beats rainy 70F every time |
 
 ## Workflow
 
@@ -31,8 +30,8 @@ Given a target date or "when should I golf next", this skill fetches weather for
 
 ```
 Best days: Mon (5/18) and Wed (5/20)
-Mon: ☀️ 68°F, 8mph WNW — Great day
-Wed: ⛅ 71°F, 12mph SW — Good, slightly windy
+Mon: 68F, 8mph WNW - Great day
+Wed: 71F, 12mph SW - Good, slightly windy
 Avoid: Tue (light rain), Thu (20mph gusts)
 ```
 
